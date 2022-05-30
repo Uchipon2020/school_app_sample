@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'photo_list_screen.dart';
+
 class SignInScreen extends StatefulWidget {
   @override
   _SignInScreenState createState() => _SignInScreenState();
@@ -67,20 +69,30 @@ class _SignInScreenState extends State<SignInScreen> {
             ),
           ),
         ),
-
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 
-  void _onSignIn(){
-    if(_formKey.currentState?.validate() != true){
+  void _onSignIn() {
+    if (_formKey.currentState?.validate() != true) {
       return;
     }
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(
+        builder: (_) => PhotoListScreen(),
+      ),
+    );
   }
 
-  void _onSignUp(){
-    if(_formKey.currentState?.validate() != true){
+  void _onSignUp() {
+    if (_formKey.currentState?.validate() != true) {
       return;
     }
+
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(
+        builder: (_) => PhotoListScreen(),
+      ),
+    );
   }
 }
