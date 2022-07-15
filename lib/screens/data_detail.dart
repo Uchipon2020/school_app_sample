@@ -4,12 +4,12 @@ import 'package:school_app_sample/models/data_school.dart';
 
 class DataDetail extends StatefulWidget{
   final String appBarTitle;
-  final DataSchool dataSchool;
+  final School school;
 
-   DataDetail(this.dataSchool,this.appBarTitle);
+   DataDetail(this.school,this.appBarTitle);
 
   @override
-  State<StatefulWidget> createState()  => DataDetailState(this.dataSchool, this.appBarTitle);
+  State<StatefulWidget> createState()  => DataDetailState(this.school, this.appBarTitle);
 }
 
 class DataDetailState extends State<DataDetail>{
@@ -17,8 +17,8 @@ class DataDetailState extends State<DataDetail>{
   //static final _priorities = ['定期健康診断','病院・診療所'];
 
   String appBarTitle;
-  DataSchool dataSchool;
-  DataDetailState(this.dataSchool, this.appBarTitle);
+  School school;
+  DataDetailState(this.school, this.appBarTitle);
 
   TextEditingController heightController = TextEditingController();
   TextEditingController weightController = TextEditingController();
@@ -26,8 +26,8 @@ class DataDetailState extends State<DataDetail>{
   @override
   Widget build(BuildContext context){
     TextStyle? textStyle = Theme.of(context).textTheme.subtitle1;
-    heightController.text = (dataSchool.height).toString();
-    weightController.text = (dataSchool.weight).toString();
+    heightController.text = (school.height).toString();
+    weightController.text = (school.weight).toString();
 
 
   return Scaffold(
@@ -109,10 +109,10 @@ class DataDetailState extends State<DataDetail>{
   );
   }
   void updateHeight(){
-    dataSchool.height = int.parse(heightController.text);
+    school.height = int.parse(heightController.text);
   }
   void updateWeight(){
-    dataSchool.weight = int.parse(weightController.text);
+    school.weight = int.parse(weightController.text);
   }
  /*void updatePriorityAsInt(String value) {
     switch (value){

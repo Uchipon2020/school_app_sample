@@ -1,10 +1,10 @@
-class DataSchool {
+class School {
   int _id;
   int _priority;
   int _height;
   int _weight;
 
-  DataSchool(this._id, this._priority, this._height, this._weight);
+  School(this._id, this._priority, this._height, this._weight);
 
   //getter setter
   int get id => _id;

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:school_app_sample/screens/data_detail.dart';
 
+import '../models/data_school.dart';
+
 class DataList extends StatefulWidget {
   const DataList({Key? key}) : super(key: key);
   @override
@@ -24,6 +26,8 @@ class DataListState extends State<DataList> {
 }
 
 ListView getDataListView() {
+  School _school = School(0,0,0,0);
+
   int count = 1;
   return ListView.builder(
       itemCount: count,
@@ -43,11 +47,11 @@ ListView getDataListView() {
                   Icons.auto_stories,
                   color: Colors.grey,
                 ),
-                onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => DataDetail()));
+                onTap: ()  {Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => DataDetail(_school ,'データ入力画面')));
                 }),
           ),
         );
       });
+
 }
