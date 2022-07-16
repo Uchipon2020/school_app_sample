@@ -85,38 +85,15 @@ class DataDetailState extends State<DataDetail> {
                 decoration: InputDecoration(
                   labelText: '体重',
                   labelStyle: textStyle,
+                  suffix: const Text(' cm'),
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0)),
+
                 ),
               ),
             ),
           ],
         ),
-        /* child: ListView(
-        children: <Widget>[
-          //プルダウンで健診の種類を選ぶ場所
-          ListTile(
-            title: DropdownButton(
-              items: _priorities.map((String dropDownStringItem){
-                return DropdownMenuItem<String>(
-                  value: dropDownStringItem,
-                  child: Text(dropDownStringItem),
-                );
-              }).toList(),
-              style: textStyle,
-
-              value: getPriorityAsString(dataSchool.priority),
-
-              onChanged: (valueSelectedByUser){
-                setState((){
-                  updatePriorityAsInt(valueSelectedByUser);
-                });
-              },
-
-            )
-          )
-        ],
-      ),*/
       ),
     );
   }
@@ -128,27 +105,4 @@ class DataDetailState extends State<DataDetail> {
   void updateWeight() {
     school.weight = int.parse(weightController.text);
   }
-  /*void updatePriorityAsInt(String value) {
-    switch (value){
-      case '定期健康診断':
-        dataSchool.priority = 1;
-        break;
-      case '診察・診療':
-        dataSchool.priority = 2;
-        break;
-    }
-
-    String getPriorityAsString(int value) {
-      String priority;
-      switch(value){
-        case 1:
-          priority = _priorities[0];
-          break;
-        case 2:
-          priority = _priorities[1];
-          break;
-      }
-      return priority;
-    }
-  }*/
 }

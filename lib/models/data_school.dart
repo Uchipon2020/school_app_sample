@@ -8,25 +8,21 @@ class School {
 
   //getter setter
   int get id => _id;
-
   set id(int value) {
     _id = value;
   }
-
+  //
   int get priority => _priority;
-
   set priority(int value) {
     _priority = value;
   }
-
+//
   int get height => _height;
-
   set height(int value) {
     _height = value;
   } //constructor
-
+//
   int get weight => _weight;
-
   set weight(int value) {
     _weight = value;
   }

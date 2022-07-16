@@ -48,7 +48,10 @@ ListView getDataListView() {
                   color: Colors.grey,
                 ),
                 onTap: ()  {Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => DataDetail(_school ,'データ入力画面')));
+                      MaterialPageRoute(
+                          builder: (context)
+                          => DataDetail(
+                              _school ,'データ入力画面')));
                 }),
           ),
         );
