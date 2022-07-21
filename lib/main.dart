@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:school_app_sample/screens/data_list.dart';
 
 import 'sign_in_screen.dart';
 
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.orange,
       ),
-      home: SignInScreen(),
+      home: DataList(),
     );
   }
 }

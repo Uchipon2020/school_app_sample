@@ -1,60 +1,171 @@
-import 'package:flutter/material.dart';
-import 'package:school_app_sample/screens/data_detail.dart';
+import 'dart:async';
 
-import '../models/data_school.dart';
+import 'package:flutter/material.dart';
+import 'package:school_app_sample/models/data_school.dart';
+import 'package:school_app_sample/screens/data_detail.dart';
+import 'package:school_app_sample/utils/database_helper.dart';
+import 'package:sqflite/sqflite.dart';
+
 
 class DataList extends StatefulWidget {
-  const DataList({Key? key}) : super(key: key);
-  @override
-  State<StatefulWidget> createState() => DataListState();
-}
 
-class DataListState extends State<DataList> {
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('MY HEALTHCARE DATA'),
-      ),
-      body: getDataListView(),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: const Icon(Icons.add),
-      ),
-    );
+  State<StatefulWidget> createState() {
+
+    return DataListState();
   }
 }
 
-ListView getDataListView() {
-  School _school = School(0,0,0,0);
+class DataListState extends State<DataList> {
 
-  int count = 1;
-  return ListView.builder(
+  DatabaseHelper databaseHelper = DatabaseHelper();
+   late List<School> dataList;
+  int count = 0;
+
+  @override
+  Widget build(BuildContext context) {
+
+    if (dataList == null) {
+      dataList = <School>[];
+      updateListView();
+    }
+
+    return Scaffold(
+
+      appBar: AppBar(
+        title: Text('MY HEALTHCARE DATA'),
+      ),
+
+      body: getNoteListView(),
+
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          debugPrint('FAB clicked');
+          navigateToDetail(School(1,''), '新規登録');
+        },
+
+        tooltip: '新規登録',
+
+        child: Icon(Icons.add),
+
+      ),
+    );
+  }
+
+  ListView getNoteListView() {
+
+    TextStyle? titleStyle = Theme.of(context).textTheme.subtitle1;
+    String type;
+
+    return ListView.builder(
       itemCount: count,
       itemBuilder: (BuildContext context, int position) {
         return Card(
           color: Colors.white,
-          elevation: 2.0,
+          elevation: 5.0,
           child: ListTile(
-            leading: const CircleAvatar(
-              backgroundColor: Colors.yellow,
-              child: Icon(Icons.arrow_circle_left_outlined),
+
+            leading: CircleAvatar(
+              backgroundColor: getPriorityColor(dataList[position].priority),
+              child: getPriorityIcon(dataList[position].priority),
             ),
-            title: const Text('定期健康診断'),
-            subtitle: const Text('受信日'),
+
+            title: Text('受診日 : ' + this.dataList[position].on_the_day),
+
+            subtitle: Text('更新日' + this.dataList[position].date),
+
             trailing: GestureDetector(
-                child: const Icon(
-                  Icons.auto_stories,
-                  color: Colors.grey,
-                ),
-                onTap: ()  {Navigator.push(context,
-                      MaterialPageRoute(
-                          builder: (context)
-                          => DataDetail(
-                              _school ,'データ入力画面')));
-                }),
+              child: Icon(Icons.auto_stories, color: Colors.grey,),
+              onTap: () {
+                //_delete(context, noteList[position]);
+                debugPrint("ListTile Tapped");
+                navigateToDetail(this.dataList[position],'参照・訂正');
+              },
+            ),
+
+
+
+
+            /* onTap: () {
+              debugPrint("ListTile Tapped");
+              navigateToDetail(this.noteList[position],'参照・訂正');
+            },*/
+
           ),
         );
-      });
+      },
+    );
+  }
 
+  // Returns the priority color
+  Color getPriorityColor(int priority) {
+    switch (priority) {
+      case 1:
+      //type = "定期";
+        return Colors.red;
+        break;
+      case 2:
+      //type = "その他";
+        return Colors.yellow;
+        break;
+
+      default:
+        return Colors.yellow;
+    }
+  }
+
+  // Returns the priority icon
+  Icon getPriorityIcon(int priority) {
+    switch (priority) {
+      case 1:
+        return Icon(Icons.play_arrow);
+        break;
+      case 2:
+        return Icon(Icons.keyboard_arrow_right);
+        break;
+
+      default:
+        return Icon(Icons.keyboard_arrow_right);
+    }
+  }
+
+  void _delete(BuildContext context, School school) async {
+
+    int result = await databaseHelper.deleteNote(school.id);
+    if (result != 0) {
+      _showSnackBar(context, '削除完了');
+      updateListView();
+    }
+  }
+
+  void _showSnackBar(BuildContext context, String message) {
+
+    final snackBar = SnackBar(content: Text(message));
+    Scaffold.of(context).showSnackBar(snackBar);
+  }
+
+  void navigateToDetail(School school, String height) async {
+    bool result = await Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return DataDetail(school, height);
+    }));
+
+    if (result == true) {
+      updateListView();
+    }
+  }
+
+  void updateListView() {
+
+    final Future<Database> dbFuture = databaseHelper.initializeDatabase();
+    dbFuture.then((database) {
+
+      Future<List<School>> noteListFuture = databaseHelper.getNoteList();
+      noteListFuture.then((noteList) {
+        setState(() {
+          this.dataList = dataList;
+          this.count = noteList.length;
+        });
+      });
+    });
+  }
 }

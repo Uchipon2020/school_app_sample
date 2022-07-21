@@ -80,7 +80,7 @@ class _SignInScreenState extends State<SignInScreen> {
     }
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(
-        builder: (_) => const DataList(),
+        builder: (_) => DataList(),
       ),
     );
   }
@@ -92,7 +92,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(
-        builder: (_) => const DataList(),
+        builder: (_) => DataList(),
       ),
     );
   }
