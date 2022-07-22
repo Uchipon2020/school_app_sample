@@ -41,7 +41,7 @@ class DataListState extends State<DataList> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           debugPrint('FAB clicked');
-          navigateToDetail(School(1,''), '新規登録');
+          navigateToDetail(School(1,'','','','','','','','','','','','','','','','','','','','','','','','','',1), '新規登録');
         },
 
         tooltip: '新規登録',

@@ -22,6 +22,7 @@ class DataDetail extends StatefulWidget {
 class DataDetailState extends State<DataDetail> {
 
   static var _priorities = ['定期', 'その他'];
+
   DatabaseHelper helper = DatabaseHelper();
 
   String appBarTitle;
@@ -125,7 +126,7 @@ class DataDetailState extends State<DataDetail> {
                       }).toList(),
                       style: textStyle,
                       value: getPriorityAsString(school.priority),
-                      onChanged: (valueSelectedByUser) {
+                      onChanged: (dynamic valueSelectedByUser) {
                         setState(() {
                           debugPrint('User selected $valueSelectedByUser');
                           updatePriorityAsInt(valueSelectedByUser);
@@ -893,7 +894,7 @@ class DataDetailState extends State<DataDetail> {
   void _save() async {
     moveToLastScreen();
 
-    school.date = DateFormat.yMMMd().format(DateTime.now());
+    school.date = (Date).format(DateTime.now());
     int result;
     if (school.id != null) {
       // Case 1: Update operation

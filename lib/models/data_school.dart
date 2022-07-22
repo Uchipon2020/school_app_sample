@@ -27,9 +27,39 @@ class School {
   String _ecg;          //心電図
   String _on_the_day;   //受診日
   String _date;         //更新日
-  int _priority;        //定期・ドッグフラグ
+  int _priority;
 
-  School(this._priority, [this._height, this._weight, this._waist,
+
+  School(
+      this._id,
+      this._height,
+      this._weight,
+      this._waist,
+      this._right_eye,
+      this._left_eye,
+      this._hearing_right_1000,
+      this._hearing_left_1000,
+      this._hearing_right_4000,
+      this._hearing_left_4000,
+      this._x_ray,
+      this._low_blood_pressure,
+      this._high_blood_pressure,
+      this._red_blood,
+      this._hemoglobin,
+      this._got,
+      this._gpt,
+      this._gtp,
+      this._ldl,
+      this._hdl,
+      this._neutral_fat,
+      this._blood_glucose,
+      this._hA1c,
+      this._ecg,
+      this._on_the_day,
+      this._date,
+      this._priority);
+
+  /*School(this._priority, [this._height, this._weight, this._waist,
     this._right_eye, this._left_eye,
     this._hearing_right_1000, this._hearing_left_1000,
     this._hearing_right_4000, this._hearing_left_4000,
@@ -38,9 +68,9 @@ class School {
     this._got, this._gpt, this._gtp, this._ldl, this._hdl, this._neutral_fat,
     this._blood_glucose, this._hA1c,
     this._ecg,
-    this._low_blood_pressure,this._high_blood_pressure,this._on_the_day]);
+    this._low_blood_pressure,this._high_blood_pressure,this._on_the_day]);*/
 
-  School.withId(this._id, this._date, this._priority,[this._height, this._weight, this._waist,
+  /*School.withId(this._id, this._date, this._priority,[/*this._height, this._weight, this._waist,
     this._right_eye, this._left_eye,
     this._hearing_right_1000, this._hearing_left_1000,
     this._hearing_right_4000, this._hearing_left_4000,
@@ -49,7 +79,7 @@ class School {
     this._got, this._gpt, this._gtp, this._ldl, this._hdl, this._neutral_fat,
     this._blood_glucose, this._hA1c,
     this._ecg,
-    this._low_blood_pressure,this._high_blood_pressure,this._on_the_day]);
+    this._low_blood_pressure,this._high_blood_pressure,this._on_the_day*/]);*/
 
   int get id => _id;
 
@@ -135,30 +165,30 @@ class School {
     }
   }
 
-  set hearing_right_1000(String newHearing_right_1000){
-    if (newHearing_right_1000.length <=255){
-      this._hearing_right_1000 = newHearing_right_1000;
+  set hearing_right_1000(String newHearingRight1000){
+    if (newHearingRight1000.length <=255){
+      this._hearing_right_1000 = newHearingRight1000;
     }
   }
-  set hearing_left_1000(String newHearing_left_1000){
-    if (newHearing_left_1000.length <=255){
-      this._hearing_left_1000 = newHearing_left_1000;
+  set hearing_left_1000(String newHearingLeft1000){
+    if (newHearingLeft1000.length <=255){
+      this._hearing_left_1000 = newHearingLeft1000;
     }
   }
-  set hearing_right_4000(String newHearing_right_4000){
-    if (newHearing_right_4000.length <=255){
-      this._hearing_right_4000 = newHearing_right_4000;
+  set hearing_right_4000(String newHearingRight4000){
+    if (newHearingRight4000.length <=255){
+      this._hearing_right_4000 = newHearingRight4000;
     }
   }
-  set hearing_left_4000(String newHearing_left_4000){
-    if (newHearing_left_4000.length <=255){
-      this._hearing_left_4000 = newHearing_left_4000;
+  set hearing_left_4000(String newHearingLeft4000){
+    if (newHearingLeft4000.length <=255){
+      this._hearing_left_4000 = newHearingLeft4000;
     }
   }
 
-  set x_ray(String newX_ray){
-    if (newX_ray.length <= 255){
-      this._x_ray = newX_ray;
+  set x_ray(String newXRay){
+    if (newXRay.length <= 255){
+      this._x_ray = newXRay;
     }
   }
 
@@ -174,9 +204,9 @@ class School {
     }
   }
 
-  set red_blood(String newRed_blood){
-    if (newRed_blood.length <= 255){
-      this._red_blood = newRed_blood;
+  set red_blood(String newRedBlood){
+    if (newRedBlood.length <= 255){
+      this._red_blood = newRedBlood;
     }
   }
 
@@ -216,15 +246,15 @@ class School {
     }
   }
 
-  set neutral_fat(String newNeutral_fat){
-    if (newNeutral_fat.length <= 255){
-      this._neutral_fat = newNeutral_fat;
+  set neutral_fat(String newNeutralFat){
+    if (newNeutralFat.length <= 255){
+      this._neutral_fat = newNeutralFat;
     }
   }
 
-  set blood_glucose(String newBlood_glucose){
-    if (newBlood_glucose.length <= 255){
-      this._blood_glucose = newBlood_glucose;
+  set blood_glucose(String newBloodGlucose){
+    if (newBloodGlucose.length <= 255){
+      this._blood_glucose = newBloodGlucose;
     }
   }
 
@@ -291,7 +321,7 @@ class School {
   }
 
   // Extract a Note object from a Map object
-  School.fromMapObject(Map<String, dynamic> map) {
+  fromMapObject(Map<String, dynamic> map) {
     this._id = map['id'];
     this._height = map['height'];
     this._weight = map['weight'];
